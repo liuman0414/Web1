@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>QQ聊天</title>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		ul,ol,li{
+			list-style: none;
+		}
+		.clearFix:after{
+			content: "";
+			display: block;
+			clear: both;
+		}
+		#wrap{
+			width: 678px;
+			height: 615px;
+			margin: 10px auto;
+			border: 1px solid #000; 
+			background-color: #f8f7f4;
+		}
+		/*顶部样式*/
+		.header{
+			height: 50px;
+		}
+		.header>span{
+			float: left;
+			margin: 20px 0 0 12px;
+			line-height: 30px;
+		}
+		.headImg{
+			width: 30px;
+			height: 30px;
+			border-radius: 50%;
+			background: url(img/head.jpg) center center;
+			background-size: cover;
+		}
+		/*导航样式*/
+		.nav{
+			height: 40px;
+			line-height: 37px;
+			border-bottom: 1px solid #e2e1df;
+		}
+		.nav>li{
+			float: left;
+			margin: 0 8px;
+			padding: 0 4px;
+			cursor: default;
+			color: #767676;
+		}
+		.nav>li:last-child:after{
+			content: "▼";
+			font-size: 10px;
+			margin-left: 5px;
+		}
+		.nav>li:hover{
+			color: #000;
+		}
+		.nav>.active{
+			color: #000;
+			border-bottom: 3px solid #009bdb;
+		}
+		/*底部主体样式*/
+		.footer>div{
+			float: left;
+		}
+		.notice{
+			width: 200px;
+			height: 525px;
+			border-left: 1px solid #e2e1df;
+
+		}
+		/*消息框样式*/
+		.talk{
+			width: 476px;
+		}
+		.talkMsg{
+			width: 476px;
+			height: 400px;
+			overflow-y: auto;
+			border-bottom: 1px solid #e2e1df;
+		}
+		.time{
+			text-align: center;
+			color: #808080;
+			font-size: 10px;
+			line-height: 30px;
+		}
+		.talkInp{
+			height: 124px;
+		}
+		.myHead{
+			float: right;
+			margin-right: 12px;
+			width: 30px;
+			height: 30px;
+			border-radius: 50%;
+			background: url(img/myHead.jpg) center center;
+			background-size: cover;
+		}
+		.content{
+			float: right;
+		}
+		.conText{
+			padding: 10px;
+			max-width: 380px;
+			line-height: 22px;
+			border-radius: 8px;
+			margin-right: 10px;
+			font-size: 12px;
+			float: left;
+			background-color: #dfdddb;
+		}
+		.area{
+			width: 456px;
+			padding: 5px 10px;
+			height: 50px;
+			resize: none;
+			outline: none;
+			border: none;
+			background-color: #f8f7f4;
+		}
+		.btn{
+			float: right;
+		}
+		.btn li{
+			font-weight: bold;
+			cursor: default;
+			display: block;
+			float: left;
+			height: 24px;
+			line-height: 24px;
+			padding: 0 16px;
+			margin-right: 12px;
+			border-radius: 4px;
+			font-size: 12px;
+			background-color: #dbd1be;
+		}
+		.send{
+			position: relative;
+		}
+		.send:after{
+			content: "▼";
+			color: #6e695f;
+			margin-left: 15px;
+		}
+		.warning{
+			width: 150px;
+			height: 50px;
+			border: 1px solid lightblue;
+			border-radius: 8px;
+			padding: 0 5px;
+			position: absolute;
+			left: -70px;
+			top: -55px;
+			display: none;
+		}
+		#zdx{
+	width:603px;
+	height:33px;
+}
+#zdx ul li{
+	list_style:none;
+	display:inline;
+	float:left;
+}
+#zyl{
+	width:460px;
+	height:300px;
+	border:1px solid;
+	position:relative;
+	top:-345px;
+	background-color:white;
+}
+#zdx .p{
+	width:460px;
+	height:37px;
+}
+#zdx.pp{
+	width:460px;
+	height:225px;
+	position:relative;
+	left:15px;
+}
+#zdx .ppp{
+	width:460px;
+	height:41px;
+}
+#llm{
+	position:absolute;
+	top:502px;
+	left:350px;
+}
+#lm{
+	position:absolute;
+	top:502px;
+	left:375px;
+}
+#lli{
+	position:absolute;
+	top:502px;
+	left:400px;
+}
+#zzdd{
+			width:129px;
+			height:145px;
+			border:1px black solid;
+			display:none;
+			position:absolute;
+			background:white;
+		}
+		#zzdd #left{
+			width:23px;
+			height:143px;
+			background:#eceeee;
+			float:left;
+		}
+		#zzdd #right{
+			width:98px;
+			height:143px;
+			font-size:12px;
+			float:left;
+		}
+		#zzdd #right li{
+			height:24px;
+			line-height: 24px;
+		}
+</style>
+</head>
+<body>
+	<div id="wrap">
+		<div class="header">
+			<span class="headImg"></span>
+			<span>三四班一家亲</span>
+		</div>
+		<ul class="nav">
+			<li class="active">聊天</li>
+			<li>公告</li>
+			<li>相册</li>
+			<li>文件</li>
+			<li>活动</li>
+			<li>设置</li>
+		</ul>
+		<div class="footer">
+			<div class="talk">
+				<div class="talkMsg">
+					<ul id="msgBox">
+						<li class="clearFix">
+							<p class="time">2017/10/12 16:59:32</p>
+							<p class="content">
+								<span class="conText">好好学习</span>
+								<span class="myHead"></span>
+							</p>
+						</li>
+						<li class="clearFix">
+							<p class="time">2017/10/12 16:59:32</p>
+							<p class="content">
+								<span class="conText">天天向上</span>
+								<span class="myHead"></span>
+							</p>
+						</li>
+					</ul>
+					<div id="zzdd">
+						<div id="left"></div>
+						<div id="right">
+							<ul>
+								<li>复制</li>
+								<li>全部选择</li><hr/>
+								<li>显示比例</li>
+								<li>使用多彩气泡</li>
+								<li>设置多彩气泡</li><hr/>
+								<li>清屏</li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+				</div>
+				<div class="talkInp">
+					<div id="zdx">
+						<ul>
+							<li id="llm"><img src="img/QQ截图20171205201847.png"/></li>
+							<li id="lm"><img src="img/QQ截图20171205212310.png"/>
+								<div id="zyl" style="display:none">
+									<div class="p">
+										<img  src="img/QQ截图20171207174020.png"/>
+									</div>
+									<div class="pp">
+									</div>
+									<div class="ppp">
+										<img src="img/QQ截图20171207174501.png"/>
+									</div>
+								</div>
+							</li>
+							<li id="lli"><img src="img/QQ截图20171207173810.png"/></li>
+						</ul>
+						</div>
+					<textarea class="area"></textarea>
+					<ul class="btn">
+						<li>关闭(c)</li>
+						<li class="send">
+							发送(s)
+							<p class="warning">发送内容不能为空，请重新输入</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="notice">
+
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+	var send = document.getElementsByClassName('send')[0];
+	var area = document.getElementsByClassName('area')[0];
+	var warning = document.getElementsByClassName('warning')[0];
+	var msgBox = document.getElementById('msgBox');
+	var timer;
+	// 回车发送消息
+	area.onkeydown = function(e){
+		if(e.keyCode == 13&&e.shiftKey==false){
+			send.onclick();
+			e.preventDefault();
+		}
+	}
+
+	// 点击发送按钮发送消息
+	send.onclick = function(){
+		if (area.value == '') {
+			warning.style.display = 'block';
+			clearTimeout(timer);
+			timer = setTimeout(function(){
+				warning.style.display = 'none';
+			},1000)
+		}else{
+			var li = document.createElement('li');
+			li.className = 'clearFix';
+			li.innerHTML = '<p class="time">'+new Date().toLocaleString()+'</p><p class="content"><span class="conText">'+area.value+'</span><span class="myHead"></span></p>';
+			msgBox.appendChild(li);
+			li.scrollIntoView();
+			area.value ='';
+			area.focus();
+		}
+	}
+//表情
+for(var i=1;i<=132;i++)
+{
+	document.getElementsByClassName('pp')[0].innerHTML+="<img src='QQ/"+i+".gif'/>";
+	if(i%18==0)
+	{
+		document.getElementsByClassName('pp')[0].innerHTML+="<br/>";
+	}
+}
+var lm=document.getElementById('lm');
+var zyl=document.getElementById('zyl');
+var m=1;
+lm.onclick=function(){
+	if(m%2==1)
+	{
+		zyl.style="display:block";
+	}
+	else if(m%2==0)
+	{
+		zyl.style="display:none";
+	}
+	m=m+1;
+}
+//右击
+	var talkarea=document.getElementsByClassName('talkMsg')[0];
+	var zzdd=document.getElementById('zzdd');
+	talkarea.oncontextmenu=function(e){
+		e.preventDefault();
+		zzdd.style.display = 'block';
+		zzdd.style.left=e.clientX+'px';
+		zzdd.style.top=e.clientY+'px';
+	}
+	talkarea.onclick=function(){
+			zzdd.style.display = 'none';
+	}
+</script>
+</html>

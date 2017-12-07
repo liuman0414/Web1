@@ -7,6 +7,9 @@
       padding:0;
       margin:0;
     }
+    ul,li{
+      list-style:none;
+    }
     .bo{
     width:1100px;
     height:100px;
@@ -121,6 +124,23 @@
       position:relative;
       left:-255px;
     }
+    .num{
+      float:left;
+      position:relative;
+      left:370px;
+      top:20px;
+    }
+    .num li{
+      float:left;
+      width:22px;
+      height:22px;
+      border-radius:50%;
+      text-align:center;
+      line-height:22px;
+      background:white;
+      color:black;
+      margin-left:9px;
+    }
   </style>
 </head>
 <body>
@@ -213,6 +233,17 @@
       <a href="#"><img src="images/banner_04.jpg"/></a>
       <div class="bottom">
         <span id="prev"><</span>
+          <ul class="num">
+            <li style="background:yellow">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+          </ul>
         <span id="next">></span>
       </div>
   </div>
@@ -223,10 +254,29 @@
   var prev=document.getElementById('prev');
   var next=document.getElementById('next');
   var i=0;
+  var num=document.getElementsByClassName('num')[0];
+  var numList=num.getElementsByTagName('li');
+  var n=0;
+  for(n;n<9;n++){
+    numList[n].index=n;
+    numList[n].onclick=function(){
+      for(var k=0;k<9;k++){
+        imgs[k].style.display='none';
+        numList[k].style.background="white";
+      }
+      imgs[this.index].style.display='block';
+      i=this.index;
+      this.style.background="yellow";
+    }
+  }
   function imgTab(){
     imgs[i%9].style.display='none';
     i++;
     imgs[i%9].style.display='block';
+    for(var k=0;k<9;k++){
+        numList[k].style.background="white";
+      }
+      numList[i%9].style.background="yellow";
   }
   var timer=setInterval(imgTab,1000);
   wrap.onmouseover=function(){
@@ -242,10 +292,18 @@
     {
       i=9;
     }
+    for(var k=0;k<9;k++){
+        numList[k].style.background="white";
+      }
+      numList[i%9].style.background="yellow";
     imgs[i%9].style.display='block';
   }
   next.onclick=function(){
     imgTab();
+    for(var k=0;k<9;k++){
+      numList[k].style.background="white";
+      }
+      numList[i%9].style.background="yellow";
   }
   window.onload = function(){
       var liNodes = document.getElementsByTagName("li");
